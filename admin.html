@@ -30,14 +30,15 @@
                 
                 <!-- User Actions -->
                 <div class="flex items-center">
-                    <a href="#" class="text-gray-600 hover:text-blue-500 mr-4">Просмотр веб-сайта</a>
-                    <span class="text-gray-600 mr-2">|</span>
+                    <a href="#" class="text-gray-500 mr-4">Просмотр веб-сайта</a>
+                    <span class="text-gray-500 mr-2">|</span>
                     <div class="person flex cursor-pointer">
                         <img src="./images/persin-icon.svg" alt="Person" width="20" height="20">
                         <span class="ml-1 text-gray-600">Joe Melton</span>
                     </div>
                 </div>
             </header>
+
             <div class="search-flex flex justify-between">
                 <div class="relative">
                     <input type="text" class="bg-white border border-gray-300 rounded-full py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Найти">
@@ -46,18 +47,15 @@
                     </svg>
                 </div>
                 <div>
-                    <button class="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400">+ Добавить продукт</button>
+                    <button class="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400 duration-300">+ Добавить продукт</button>
                 </div>
             </div>
             
-
-            <!-- Product Categories -->
-            <div class="flex space-x-6 mb-4">
-                <button class="text-teal-600 border-b-4 border-teal-600 pb-1 focus:outline-none">Каркасные</button>
-                <button class="text-gray-500 hover:text-gray-700 pb-1 focus:outline-none">Надувные</button>
+            <div class="flex space-x-6 mb-4 mt-6 justify-center">
+                <button class="border-gray-100 border-b-4 pb-1 hover:text-teal-600 hover:border-teal-600 duration-300">Каркасные</button>
+                <button class="border-gray-100 border-b-4 pb-1 hover:text-teal-600 hover:border-teal-600 duration-300">Надувные</button>
             </div>
 
-            <!-- Product Table -->
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-50">
@@ -69,9 +67,6 @@
                             <th class="px-6 py-3 border-b border-gray-200 text-gray-600 text-left text-sm uppercase font-medium">Действия</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Dynamic rows would go here -->
-                    </tbody>
                 </table>
             </div>
         </main>
