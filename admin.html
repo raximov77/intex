@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Layout</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-100 font-sans">
 
@@ -27,8 +35,6 @@
 
         <main class="flex-1 p-6">
             <header class="flex justify-end items-center mb-6 mr-4">
-                
-                <!-- User Actions -->
                 <div class="flex items-center">
                     <a href="#" class="text-gray-500 mr-4">Просмотр веб-сайта</a>
                     <span class="text-gray-500 mr-2">|</span>
@@ -41,18 +47,19 @@
 
             <div class="search-flex flex justify-between">
                 <div class="relative">
-                    <input type="text" class="bg-white border border-gray-300 rounded-full py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Найти">
+                    <input id="searchInput" type="text" class="bg-white border border-gray-300 rounded-full py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Найти">
                     <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17.5 10.5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
+
                 <div>
                     <button class="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-400 duration-300">+ Добавить продукт</button>
                 </div>
             </div>
             
             <div class="flex space-x-6 mb-4 mt-6 justify-center">
-                <button class="border-gray-100 border-b-4 pb-1 hover:text-teal-600 hover:border-teal-600 duration-300">Каркасные</button>
+                <button class="border-teal-500 border-b-4 pb-1 text-teal-600 duration-300">Каркасные</button>
                 <button class="border-gray-100 border-b-4 pb-1 hover:text-teal-600 hover:border-teal-600 duration-300">Надувные</button>
             </div>
 
@@ -67,9 +74,82 @@
                             <th class="px-6 py-3 border-b border-gray-200 text-gray-600 text-left text-sm uppercase font-medium">Действия</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200">
+                            <td class="px-4 py-2 whitespace-nowrap">
+                                <img src="./images/persin-icon.svg" alt="Product Image" class="w-20 h-20">
+                            </td>
+                            <td class="px-4 py-2 whitespace-nowrap text-gray-900 font-semibold">2000000</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-gray-900">10</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-gray-900">Металлический</td>
+                            <td class="px-4 py-2 whitespace-nowrap">
+                                <div class="flex items-center space-x-5">
+                                    <button class="text-teal-500 hover:text-teal-600 edit-button">
+                                        <i class="fa-sharp fa-solid fa-pen"></i>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-600 delete-button">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>                                    
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </main>
+        <div id="productModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+                <button class="absolute top-2 right-2 text-gray-600" id="closeModal">×</button>
+                <h2 class="text-lg font-semibold mb-4">Добавить продукт</h2>
+                <form id="productForm">
+                    <div class="mb-4">
+                        <label for="imageUpload" class="block text-gray-700">Изображение:</label>
+                        <input type="file" id="imageUpload" accept="image/*" class="border border-gray-300 rounded-md w-full px-3 py-2" required>
+                        <img id="imagePreview" class="mt-2 w-full h-32 object-cover hidden">
+                    </div>
+                    <div class="mb-4">
+                        <label for="category" class="block text-gray-700">Категория:</label>
+                        <select id="category" class="border border-gray-300 rounded-md w-full px-3 py-2">
+                            <option value="Каркасные">Каркасные</option>
+                            <option value="Надувные">Надувные</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="price" class="block text-gray-700">Цена (сум):</label>
+                        <input type="text" id="price" class="border border-gray-300 rounded-md w-full px-3 py-2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="quantity" class="block text-gray-700">Количество:</label>
+                        <input type="text" id="quantity" class="border border-gray-300 rounded-md w-full px-3 py-2" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="frame" class="block text-gray-700">Рамка:</label>
+                        <select id="frame" class="border border-gray-300 rounded-md w-full px-3 py-2">
+                            <option value="1">Металлический</option>
+                            <option value="2">Прямоугольная</option>
+                            <option value="3">Рамка призмы</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 w-full">Добавить</button>
+                </form>
+            </div>
+        </div>
+        
+        
     </div>
+
+    <script src="./js/Admin/admin.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+    </script>
 </body>
 </html>
